@@ -1,0 +1,25 @@
+{
+  "name": "broadcaster",
+  "version": "1.0.0",
+  "description": "A simple pubsub system written with functional javascript methodologies",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code0wl/broadcaster.git"
+  },
+  "keywords": [
+    "pubsub",
+    "tested",
+    "functional",
+    "javascript"
+  ],
+  "author": "oscar lodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/code0wl/broadcaster/issues"
+  },
+  "homepage": "https://github.com/code0wl/broadcaster#readme"
+}
