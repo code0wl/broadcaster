@@ -7,22 +7,14 @@ const frequency = (function() {
 
         version = '1.0.0',
 
-        // subscriber
         tuneIn = (station, frequency, fn) => {
             stations.push({station, frequencies: [frequency], dial: fn});
         },
 
-        // publish
         broadcast = (station, frequency) => {
             stations.map(item => {
                 if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
-                    if (typeof item.dial === 'object') {
-                        console.log(item.dial);
-                        return item.dial;
-
-                    } else {
-                        return item.dial();
-                    }
+                    return typeof item.dial === 'object' ? item.dial : item.dial();
                 }
             });
         },
@@ -52,8 +44,7 @@ const frequency = (function() {
 })();
 
 // dummy content to subscribe to
-frequency.tuneIn('poop', 'Alarm', {item: 1});
-
+frequency.tuneIn('poop', 'Alarm', someFunc);
 frequency.broadcast('poop', 'Alarm');
 
 function someFunc() {
