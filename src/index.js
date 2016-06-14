@@ -1,30 +1,30 @@
 'use strict';
 
 const frequency = (function() {
-    const
 
+    const
         stations = [],
 
         version = '1.0.0',
 
         // subscriber
         tuneIn = (station, frequency, fn) => {
-            stations.push({station, frequencies: [frequency]});
-            if (fn) {
-                message()
-            }
+            stations.push({station, frequencies: [frequency], dial: fn});
         },
 
         // publish
         broadcast = (station, frequency) => {
-            const filtered = stations.map(item => {
-                if (item.station === station ) {
-                    return station;
-                } else {
-                    return;
+            stations.map(item => {
+                if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
+                    if (typeof item.dial === 'object') {
+                        console.log(item.dial);
+                        return item.dial;
+
+                    } else {
+                        return item.dial();
+                    }
                 }
             });
-            console.log(filtered);
         },
 
         tuneOut = ( station, frequency ) => {
@@ -41,11 +41,6 @@ const frequency = (function() {
             });
         };
 
-    function message(...obj) {
-        console.log('sdgds', obj);
-        return obj;
-    }
-
     return {
         version,
         tuneIn,
@@ -57,5 +52,10 @@ const frequency = (function() {
 })();
 
 // dummy content to subscribe to
-frequency.tuneIn('poop', 'Alarm');
+frequency.tuneIn('poop', 'Alarm', {item: 1});
+
 frequency.broadcast('poop', 'Alarm');
+
+function someFunc() {
+    console.log('poop');
+}
