@@ -1,36 +1,61 @@
 'use strict';
 
 const frequency = (function() {
-
     const
 
-    stations = [],
+        stations = [],
 
-    version = () => {
-        return '1.0.0';
-    },
+        version = '1.0.0',
 
-    tuneIn = ( station, frequency ) => {
-        stations.push({station, frequencies: [frequency]});
-        console.log(`${station} station and ${frequency} frequency saved successfully`);
-    },
+        // subscriber
+        tuneIn = (station, frequency, fn) => {
+            stations.push({station, frequencies: [frequency]});
+            if (fn) {
+                message()
+            }
+        },
 
-    tuneOut = ( station, frequency ) => {
-        return archive.filter( () => {
-            return channel === channel
-        });
-    },
+        // publish
+        broadcast = (station, frequency) => {
+            const filtered = stations.map(item => {
+                if (item.station === station ) {
+                    return station;
+                } else {
+                    return;
+                }
+            });
+            console.log(filtered);
+        },
 
-    shutDown = () => {
-        // resets an archive
-    };
+        tuneOut = ( station, frequency ) => {
+            return stations.filter( () => {
+                return frequency === station.frequency;
+            });
+        },
+
+        shutDown = station => {
+            stations.map((station, index) => {
+                if (station === frequency) {
+                    stations.splice(index, 1);
+                }
+            });
+        };
+
+    function message(...obj) {
+        console.log('sdgds', obj);
+        return obj;
+    }
 
     return {
         version,
         tuneIn,
         tuneOut,
-        stations,
+        broadcast,
         shutDown
     }
 
 })();
+
+// dummy content to subscribe to
+frequency.tuneIn('poop', 'Alarm');
+frequency.broadcast('poop', 'Alarm');
