@@ -14,22 +14,14 @@ module.exports = {
     },
 
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: true
-        //     }
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: true
+            }
+        })
     ],
 
     module: {
-        preLoaders: [
-            {
-                test: /\.js$/,
-                loader: 'eslint-loader',
-                exclude: /node_modules/
-            }
-        ],
-
         loaders: [
             {
                 test: /\.js$/,

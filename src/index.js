@@ -4,41 +4,41 @@ window.frequency = (function() {
 
     const
 
-        stations = [],
+    stations = [],
 
-        version = '1.0.0',
+    version = '1.0.0',
 
-        // Register station, frequency and wave to make available to listeners
-        tuneIn = (station, frequency, wave) => {
-            stations.push({station, frequencies: [frequency], dial: wave});
-        },
+    // Register station, frequency and wave to make available to listeners
+    tuneIn = (station, frequency, wave) => {
+        stations.push({station, frequencies: [frequency], dial: wave});
+    },
 
-        // Broadcast station and frequency to all listeners
-        broadcast = (station, frequency) => {
-            return stations.filter(item => {
-                if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
-                    return typeof item.dial === 'object' ? item.dial : item.dial();
-                }
-            });
-        },
+    // Broadcast station and frequency to all listeners
+    broadcast = (station, frequency) => {
+        return stations.filter(item => {
+            if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
+                return typeof item.dial === 'object' ? item.dial : item.dial();
+            }
+        });
+    },
 
-        // Tuneout a frequency
-        tuneOut = ( station, frequency ) => {
-            return stations.filter( item => {
-                if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
-                    item.frequencies.pop();
-                }
-            });
-        },
+    // Tuneout a frequency
+    tuneOut = ( station, frequency ) => {
+        return stations.filter( item => {
+            if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
+                item.frequencies.pop();
+            }
+        });
+    },
 
-        // shotdown a station
-        shutDown = station => {
-            stations.filter( item => {
-                if (item.station === station) {
-                    item.delete;
-                }
-            });
-        };
+    // shotdown a station that no longer has listeners
+    shutDown = station => {
+        stations.map( item => {
+            if (item.station === station) {
+                stations.splice(stations.indexOf(item))
+            }
+        });
+    };
 
     return {
         version,
