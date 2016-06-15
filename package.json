@@ -1,5 +1,5 @@
 {
-  "name": "frequency",
+  "name": "frequency-wave",
   "version": "1.0.0",
   "description": "Frequency is a clean memory conservative pubsub system",
   "main": "./src/index.js",
@@ -8,6 +8,7 @@
   },
   "repository": {
     "type": "git",
+    "start": "webpack -w",
     "url": "git+https://github.com/code0wl/broadcaster.git"
   },
   "keywords": [
@@ -25,7 +26,7 @@
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.0.15",    
+    "babel-preset-stage-0": "^6.0.15",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
