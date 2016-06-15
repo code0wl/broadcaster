@@ -1,11 +1,12 @@
 # Frequency-wave
+<img src="src/radio.jpg">
 A plug and play PubSub system that just works as if it were an FM radio :)))
 
 ### Why another publish and subscribe pattern you ask?
-Simply because creating custom events that get fired syntactically in the browser is a very handy pattern. With thousands of implementations out in the wild and still it wasn't clear to see which one was memory conservative (this could be my own short-sidedness). Conserving memory is extremely important depending on how complex your application state is. Frequency wave focuses clearly on just that. Allowing you to remove namespaced events so you do not pullote your own global scopes with unnecessary memory usage.
+Simply because creating custom events that get fired syntactically in the browser is a very handy pattern. With thousands of implementations out in the wild and still it wasn't clear to see which one was memory conservative (this could be my own short-sidedness). Conserving memory is extremely important depending on how complex your application state is. Frequency wave focuses clearly on just that. Allowing you to remove name-spaced events so you do not pollute your own global scopes with unnecessary memory usage.
 
 ### Solution
-On of the solutions to this problem is to include a system that gives the developer the ability to flush out stations (trasmitters).
+On of the solutions to this problem is to include a system that gives the developer the ability to flush out stations (transmitters).
 
 ### Usage in the browser
 Include the minified js file from npm by installing from npm repository and importing it in your build tool
@@ -46,7 +47,7 @@ frequency.transmit('FM', 'Alarm2'); // will trigger firstAlarm
 
 frequency.tuneOut('FM', 'Alarm'); // tune out the first alarm frequency on the FM station
 frequency.transmit('FM', 'Alarm'); // will no longer work
-frequency.transmit('FM', 'Alarm2'); // will still work (benefit: you are namespacing your pubsub events)
+frequency.transmit('FM', 'Alarm2'); // will still work (benefit: you are name-spacing your Pubsub events)
 
 frequency.shutDown('FM'); // Station gets destroyed, no channel is listened to anymore and memory released to be allocated somewhere else
 
