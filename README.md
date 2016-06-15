@@ -1,5 +1,5 @@
 # Frequency-wave
-<img src="src/radio.jpg">
+<img src="src/radio.jpg"> <br>
 A plug and play PubSub system that just works as if it were an FM radio :)))
 
 ### Why another publish and subscribe pattern you ask?
