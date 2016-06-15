@@ -1,34 +1,41 @@
 'use strict';
 
-const frequency = (function() {
+window.frequency = (function() {
 
     const
+
         stations = [],
 
         version = '1.0.0',
 
-        tuneIn = (station, frequency, fn) => {
-            stations.push({station, frequencies: [frequency], dial: fn});
+        // Register station, frequency and wave to make available to listeners
+        tuneIn = (station, frequency, wave) => {
+            stations.push({station, frequencies: [frequency], dial: wave});
         },
 
+        // Broadcast station and frequency to all listeners
         broadcast = (station, frequency) => {
-            stations.map(item => {
+            return stations.filter(item => {
                 if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
                     return typeof item.dial === 'object' ? item.dial : item.dial();
                 }
             });
         },
 
+        // Tuneout a frequency
         tuneOut = ( station, frequency ) => {
-            return stations.filter( () => {
-                return frequency === station.frequency;
+            return stations.filter( item => {
+                if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
+                    item.frequencies.pop();
+                }
             });
         },
 
+        // shotdown a station
         shutDown = station => {
-            stations.map((station, index) => {
-                if (station === frequency) {
-                    stations.splice(index, 1);
+            stations.filter( item => {
+                if (item.station === station) {
+                    item.delete;
                 }
             });
         };
@@ -40,13 +47,4 @@ const frequency = (function() {
         broadcast,
         shutDown
     }
-
 })();
-
-// dummy content to subscribe to
-frequency.tuneIn('poop', 'Alarm', someFunc);
-frequency.broadcast('poop', 'Alarm');
-
-function someFunc() {
-    console.log('poop');
-}

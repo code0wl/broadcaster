@@ -6,6 +6,43 @@
     </head>
     <body>
 
+        <button class="trigger-alarm" name="button"> I will trigger an event </button>
+        <button class="trigger-station" name="button"> Shutdown broadcasting station </button>
+
         <script src="../dist/frequency.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            'use strict';
+
+            const alarms = document.querySelector('.trigger-alarm');
+            const stations = document.querySelector('.trigger-station');
+
+            alarms.addEventListener('click', alarmHandler);
+            stations.addEventListener('click', stationHandler);
+
+            // register receiver to tune into a station at a frequency. Callback can be a function or an object
+            frequency.tuneIn('FM', 'Alarm', firstAlarm);
+            frequency.tuneIn('FM', 'Alarm2', secondAlarm);
+
+            function alarmHandler(e) {
+                frequency.broadcast('FM', 'Alarm');
+                frequency.broadcast('FM', 'Alarm2');
+                frequency.tuneOut('FM', 'Alarm'); // tune out the first alarm
+                alarms.textContent = 'I will now only fire the second alarm';
+            }
+
+            function stationHandler(e) {
+                frequency.shutDown('FM');
+                stations.textContent = 'The FM station is no longer broadcasting';
+                alarms.textContent = 'I will no longer fire any events';
+            }
+
+            function firstAlarm() {
+                alert('first alarm');
+            }
+
+            function secondAlarm() {
+                alert('second alarm');
+            }
+        </script>
     </body>
 </html>
