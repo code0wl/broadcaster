@@ -33,7 +33,7 @@ window.frequency = (function() {
 
     // shotdown a station that no longer has listeners
     shutDown = station => {
-        stations.map( item => {
+        stations.filter( item => {
             if (item.station === station) {
                 stations.splice(stations.indexOf(item))
             }
