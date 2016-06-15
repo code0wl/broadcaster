@@ -1,8 +1,8 @@
 {
   "name": "frequency-wave",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Frequency is a clean memory conservative pubsub system",
-  "main": "./src/index.js",
+  "main": "./dist/frequency.min.js",
   "scripts": {
     "test": "karma test"
   },

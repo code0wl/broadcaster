@@ -6,26 +6,26 @@ window.frequency = (function() {
 
     stations = [],
 
-    version = '1.0.0',
+    version = '1.1.0',
 
-    // Register station, frequency and wave to make available to listeners
-    tuneIn = (station, frequency, wave) => {
-        stations.push({station, frequencies: [frequency], dial: wave});
+    // Register station, frequency and transmit to make available to listeners
+    tuneIn = (station, tuner, wave) => {
+        stations.push({station, frequencies: [tuner], amplitude: wave});
     },
 
     // Broadcast station and frequency to all listeners
-    broadcast = (station, frequency) => {
-        return stations.filter(item => {
-            if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
-                return typeof item.dial === 'object' ? item.dial : item.dial();
+    transmit = (station, tuner) => {
+        return stations.map(item => {
+            if (item.station === station && item.frequencies.indexOf(tuner) > -1) {
+                return typeof item.amplitude === 'object' ? item.amplitude : item.amplitude();
             }
         });
     },
 
     // Tuneout a frequency
-    tuneOut = ( station, frequency ) => {
-        return stations.filter( item => {
-            if (item.station === station && item.frequencies.indexOf(frequency) > -1) {
+    tuneOut = (station, tuner) => {
+        return stations.map( item => {
+            if (item.station === station && item.frequencies.indexOf(tuner) > -1) {
                 item.frequencies.pop();
             }
         });
@@ -33,7 +33,7 @@ window.frequency = (function() {
 
     // shotdown a station that no longer has listeners
     shutDown = station => {
-        stations.filter( item => {
+        stations.map( item => {
             if (item.station === station) {
                 stations.splice(stations.indexOf(item))
             }
@@ -44,7 +44,7 @@ window.frequency = (function() {
         version,
         tuneIn,
         tuneOut,
-        broadcast,
+        transmit,
         shutDown
     }
 })();
