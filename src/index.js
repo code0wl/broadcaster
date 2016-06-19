@@ -6,7 +6,7 @@ window.frequency = (function() {
 
     stations = [],
 
-    version = '1.1.6',
+    version = '1.1.7',
 
     // Register station, frequency and transmit to make available to listeners
     tuneIn = (station, tuner, wave) => {
