@@ -1,4 +1,4 @@
-# Frequency-wave
+# Frequency-wave <img src="https://travis-ci.org/code0wl/frequency.svg?branch=master" title="Build information" />
 <img src="src/radio.jpg"> <br>
 A plug and play PubSub system that just works as if it were an FM radio :)))
 
