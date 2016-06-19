@@ -1,15 +1,16 @@
 const
-    webpack = require('webpack');
+    webpack = require('webpack'),
+    path = require('path');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/index',
 
     resolve: {
         extensions: ['', '.js']
     },
 
     output: {
-        path: './dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'frequency.min.js'
     },
 

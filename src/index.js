@@ -6,7 +6,7 @@ window.frequency = (function() {
 
     stations = [],
 
-    version = '1.1.1',
+    version = '1.1.4',
 
     // Register station, frequency and transmit to make available to listeners
     tuneIn = (station, tuner, wave) => {
@@ -16,7 +16,7 @@ window.frequency = (function() {
     // Broadcast station and frequency to all listeners
     transmit = (station, tuner) => {
         return stations.map(item => {
-            if (item.station === station && item.frequencies.indexOf(tuner) > -1) {
+            if (item.station === station && item.frequencies.includes(tuner)) {
                 return typeof item.amplitude === 'object' ? item.amplitude : item.amplitude();
             }
         });
@@ -24,8 +24,8 @@ window.frequency = (function() {
 
     // Tuneout a frequency
     tuneOut = (station, tuner) => {
-        return stations.map( item => {
-            if (item.station === station && item.frequencies.indexOf(tuner) > -1) {
+        return stations.map(item => {
+            if (item.station === station && item.frequencies.includes(tuner)) {
                 item.frequencies.pop();
             }
         });
@@ -33,18 +33,21 @@ window.frequency = (function() {
 
     // shotdown a station that no longer has listeners
     shutDown = station => {
-        stations.map( item => {
+        stations.map(item => {
             if (item.station === station) {
-                stations.splice(stations.indexOf(item))
+                stations.splice(stations.includes(item));
             }
         });
     };
 
     return {
         version,
+        stations,
         tuneIn,
         tuneOut,
         transmit,
         shutDown
     }
 })();
+
+export default frequency;
